@@ -1,0 +1,26 @@
+<div *ngIf="product">
+  <div class="product-detail-container">
+      <div class="product-image">
+          <img [src]="product.image" alt="{{ product.title }}">
+      </div>
+      <div class="product-info">
+          <h1 class="product-title">{{ product.title }}</h1>
+          <p class="product-description">{{ product.description }}</p>
+          <p class="product-category">Category: {{ product.category }}</p>
+          <div class="product-rating">
+            <span>Rating: </span>
+            <app-rating [rating]="product.rating.rate" />
+          </div>
+          <div class="product-price">
+              <p>Price: {{ product.price | currency }}</p>
+          </div>
+          <div class="add-to-cart-container">
+            <div class="quantity">
+              <label for="quantity" class="quantity-label">Quantity:</label>
+              <input type="number" class="quantity-input" min="1" [(ngModel)]="quantity">
+            </div>
+          </div>
+          <button class="add-to-cart-button" (click)="addToCart(quantity)">Add to cart</button>
+      </div>
+  </div>
+</div>

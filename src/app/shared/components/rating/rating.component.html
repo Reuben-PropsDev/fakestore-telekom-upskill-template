@@ -1,0 +1,12 @@
+<div class="star-rating-container">
+  <ng-container *ngFor="let star of stars">
+    <svg xmlns="http://www.w3.org/2000/svg" class="star-icon" viewBox="0 0 20 20" fill="currentColor">
+      <ng-container *ngIf="star <= rating">
+        <path fill-rule="evenodd" d="M10 1.666l1.55 4.7h4.975l-4.025 2.925 1.55 4.7-4.025-2.925-4.025 2.925 1.55-4.7-4.025-2.925h4.975l1.55-4.7z" clip-rule="evenodd" />
+      </ng-container>
+      <ng-container *ngIf="star > rating">
+        <path fill-rule="evenodd" d="M10 1.666l1.55 4.7h4.975l-4.025 2.925 1.55 4.7-4.025-2.925-4.025 2.925 1.55-4.7-4.025-2.925h4.975l1.55-4.7z" clip-rule="evenodd" fill-opacity="0.3" />
+      </ng-container>
+    </svg>
+  </ng-container>
+</div>

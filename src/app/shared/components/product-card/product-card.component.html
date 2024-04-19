@@ -1,0 +1,19 @@
+<div class="product-card">
+  <img class="product-image" [src]="product.image" alt="Product" />
+  <div class="product-details">
+    <div class="product-title">{{ product.title }}</div>
+    <div class="product-info">
+      <div class="product-price">$ {{ product.price }}</div>
+      <div class="product-rating">
+        <app-rating [rating]="product.rating.rate"></app-rating>
+      </div>
+    </div>
+    <div class="add-to-cart-container">
+      <div class="quantity">
+        <label for="quantity" class="quantity-label">Quantity:</label>
+        <input type="number" class="quantity-input" min="1" [(ngModel)]="quantity" (click)="$event.stopPropagation()">
+      </div>
+      <button class="add-to-cart-button" (click)="addToCart($event)">Add to cart</button>
+    </div>
+  </div>
+</div>

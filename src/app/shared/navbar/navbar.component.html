@@ -1,0 +1,18 @@
+<div class="navbar">
+  <img routerLink="/products" [src]="logo" alt="logo" class="logo" />
+  <input
+    type="text"
+    placeholder="Search for products"
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+    class="search-input"
+  />
+  <div class="navbar-right">
+    <a routerLink="/products" class="underline">Products</a>
+    <button (click)="goToCartPage()" class="cart-container">
+      <img [src]="cart" alt="shopping cart" class="cart-icon">
+      <span class="cart-count">{{cartQuantity}}</span>
+    </button>
+    <button class="auth-button" (click)="loginText ? logOut() : login()">{{loginText ? 'Logout' : 'Login'}}</button>
+  </div>
+</div>

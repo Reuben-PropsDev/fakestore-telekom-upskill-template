@@ -1,0 +1,10 @@
+.star-icon {
+  width: 25px;
+  height: 25px;
+  color: rgba(0, 0, 255, 0.548);
+}
+
+.star-rating-container {
+  display: inline-flex;
+  align-items: center;
+}

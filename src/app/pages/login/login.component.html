@@ -1,0 +1,28 @@
+<div class="login-container">
+  <div class="login-box"
+    [ngClass]="errorMessage ? 'border border-red-500' : ''"
+  >
+    <h2 class="login-title">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+      <mat-form-field class="form-group" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput id="username" formControlName="username" />
+        <mat-error *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-group" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" id="password" formControlName="password" />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+      <div class="button-error ">
+        <button mat-raised-button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </div>
+    </form>
+  </div>
+</div>
