@@ -10,12 +10,10 @@ export class SearchService {
   public searchQuery$: Observable<string> = this.searchQuerySubject.asObservable();
 
   public setSearchQuery(searchQuery: string): void {
-    console.log('searchQuery',searchQuery);
     this.searchQuerySubject.next(searchQuery);
   }
 
   public getSearchQuery(): Observable<string> {
-    console.log('searchQuerybbbb',this.searchQuery$);
     return this.searchQuery$;
   }
 }

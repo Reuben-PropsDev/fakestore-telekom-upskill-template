@@ -27,12 +27,10 @@ export class MasterService {
   }
 
   public getUsers(url: string) {
-    console.log('url',url);
     return this.http.get(url);
   }
 
   public addToCart(url: string, data: Product) {
-    console.log('data in addToCart',data);
     return this.http.post<ICart>(url, {...data});
   }
 }

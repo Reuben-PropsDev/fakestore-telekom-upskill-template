@@ -15,7 +15,6 @@ export class TokenInterceptor implements HttpInterceptor {
   public constructor(private readonly authenticationService: AuthenticationService) {}
 
   public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('request', this.authenticationService.token);
     const newHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.authenticationService.token,
