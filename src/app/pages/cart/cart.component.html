@@ -9,7 +9,7 @@
               <img [src]="item.image" [alt]="item.title" class="item-image">
               <div class="item-details">
                   <h3>{{ item.title }}</h3>
-                  <p>Price: ${{ item.price }}</p>
+                  <p>Price: {{ item.price | currency }}</p>
                   <div class="quantity">
                     <label for="quantity" class="quantity-label">Quantity:</label>
                     <input type="number"
@@ -18,14 +18,15 @@
                       min="1"
                       [(ngModel)]="item.quantity"
                       [value]="item.quantity"
+                      (ngModelChange)="onQuantityChange(item)"
                     >
                   </div>
               </div>
-              <button (click)="removeItem(item.id)" class="remove-button">X</button>
+              <button mat-button (click)="removeItem(item.id)" class="remove-button">X</button>
           </div>
       </li>
   </ul>
   <div class="cart-footer">
-      <p>Total Cost: ${{ totalCost }}</p>
+      <p>Total Cost: {{ totalCost | currency }}</p>
   </div>
 </div>

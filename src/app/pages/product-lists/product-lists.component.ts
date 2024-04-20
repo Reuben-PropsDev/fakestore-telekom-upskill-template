@@ -26,14 +26,12 @@ export class ProductListsComponent implements OnInit {
 
   public getFilterQuery(): void {
     this.searchService.getSearchQuery().subscribe(searchQuery => {
-      console.log('searchQuery in ngOnInit',searchQuery);
       this.searchQuery = searchQuery;
       this.filterProducts();
     });
   }
 
   public addToCart(data:Product) {
-    console.log('data in addToCart product-lists',data);
     this.allProducts.addItemToCart(data);
   }
 
@@ -44,7 +42,6 @@ export class ProductListsComponent implements OnInit {
   private getAllProducts(){
     this.allProducts.getProducts().subscribe({
       next: (data) =>{
-        console.log('data',data);
         this.products = data;
         this.getFilterQuery();
       },

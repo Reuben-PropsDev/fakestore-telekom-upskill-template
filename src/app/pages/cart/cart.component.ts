@@ -15,9 +15,12 @@ export class CartComponent implements OnInit {
   public constructor(private productService: ProductListsService) {}
 
   public ngOnInit(): void {
-    this.cart = this.productService.getCartData();
-    console.log('cart', this.cart, '..........',this.productService.getCartData());
+    this.getCarts();
     this.calculateTotalCost();
+  }
+
+  public getCarts(){
+    return this.cart = this.productService.getCartData();
   }
 
   public calculateTotalCost() {
@@ -25,19 +28,20 @@ export class CartComponent implements OnInit {
   }
 
   public removeItem(item: number) {
-    console.log('item', item);
-    // this.productService.removeItemFromCart(item);
-    // this.updateCart();
+    this.productService.removeItemFromCart(item);
+    this.getCarts();
+    this.updateCart();
   }
 
   public updateCart() {
-    localStorage.setItem('cartData', JSON.stringify(this.cart));
+    this.productService.storeData<Product[]>('cartData', this.cart);
     this.calculateTotalCost();
   }
 
-  public proceedToCheckout() {
-    // Implement your checkout logic here
-    console.log('Proceeding to checkout...');
-    // You can navigate to the checkout page if needed
+  public onQuantityChange(item: Product) {
+    if (item.quantity && item.quantity < 1) {
+      item.quantity = 1;
+    }
+    this.updateCart();
   }
 }

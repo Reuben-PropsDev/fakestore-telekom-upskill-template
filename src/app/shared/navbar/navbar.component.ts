@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
       }
     });
     this.productServie.cartQuantity$.subscribe(quantity => {
-      this.cartQuantity = quantity || this.productServie.getCartQuantity();
+      this.cartQuantity = quantity || this.productServie.getCartData().length;
     });
   }
 

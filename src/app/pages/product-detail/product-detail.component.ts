@@ -22,7 +22,6 @@ export class ProductDetailComponent implements OnInit {
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.productId = params['id'];
-      console.log('product id', params['id']);
     });
 
     this.getProductDetail();
@@ -36,14 +35,12 @@ export class ProductDetailComponent implements OnInit {
       this.productDetail.getSingleProduct(this.productId).subscribe(data => {
         this.product = data;
         this.quantity = data.quantity || 1;
-        console.log('product detail', data);
       });
     }
   }
 
   public addToCart(quantity: number) {
     const product = { ...this.product, quantity};
-    console.log('product',product);
     this.productDetail.addItemToCart(product);
   }
 }

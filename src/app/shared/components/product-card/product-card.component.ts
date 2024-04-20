@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/interface/types';
+import { ProductListsService } from 'src/app/core/models/services/products/product-lists.service';
 
 @Component({
   selector: 'app-product-card',
@@ -13,11 +13,11 @@ export class ProductCardComponent {
   @Output() public addProductToCart = new EventEmitter();
   public quantity = 1;
 
-  public constructor(private route: Router) {}
+  public constructor(private productService: ProductListsService) {}
   public addToCart(event: Event) {
     event.stopPropagation();
     const product = { ...this.product, quantity: this.quantity };
-    localStorage.setItem('cartData', JSON.stringify(product));
+    this.productService.storeData<Product>('cartData', product);
     this.addProductToCart.emit(product);
   }
 }

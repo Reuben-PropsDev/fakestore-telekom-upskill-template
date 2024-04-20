@@ -9,9 +9,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductListsService {
-  private cartQuantitySubject = new BehaviorSubject<number>(0);
+  public cartQuantitySubject = new BehaviorSubject<number>(0);
   public cartQuantity$ = this.cartQuantitySubject.asObservable();
-  private cart: Product[] = [];
+  public cart: Product[] = [];
   public cartDataSubject = new BehaviorSubject<Product[]>([]);
   public cartData$ = this.cartDataSubject.asObservable();
 
@@ -20,12 +20,14 @@ export class ProductListsService {
 
   public constructor(private master: MasterService) {
     this.cartQuantitySubject = new BehaviorSubject(
-      JSON.parse(localStorage.getItem('cartData')!).length || 0
+      JSON.parse(localStorage.getItem('cartData') ?? '[]').length
     );
     this.cartDataSubject = new BehaviorSubject(
-      JSON.parse(localStorage.getItem('cartData')!)
+      JSON.parse(localStorage.getItem('cartData') ?? '[]')
     );
-    this.cart = this.cartDataSubject.value;
+    if (this.cartDataSubject.value) {
+      this.cart = [...this.cartDataSubject.value];
+    }
   }
 
   public getProducts() {
@@ -45,14 +47,9 @@ export class ProductListsService {
     } else {
       this.cart.push(item);
     }
-    localStorage.setItem('cartData', JSON.stringify(this.cart));
-    this.updateCartQuantity();
+    this.storeData<Product[]>('cartData',this.cart);
     this.updateCartData();
-    this.getCartQuantity();
-  }
 
-  public getCart() {
-    return this.cart;
   }
 
   public getCartData() {
@@ -61,30 +58,27 @@ export class ProductListsService {
 
   public removeItemFromCart(id: number) {
     this.cart = this.cart.filter(cartItem => cartItem.id !== id);
-    localStorage.setItem('cartData', JSON.stringify(this.cart));
+
+    this.storeData<Product[]>('cartData', this.cart);
     this.updateCartData();
   }
 
-  public clearCart() {
-    this.cart = [];
-    localStorage.setItem('cartData', JSON.stringify(this.cart));
-    this.updateCartData();
-  }
 
   public updateCartData() {
-    this.cartDataSubject.next(this.cart);
+    const cartData = this.getStoredData('cartData');
+    this.cartDataSubject.next(cartData);
+    this.cartQuantitySubject.next(cartData.length);
   }
-
-  public updateCartQuantity() {
-    this.cartQuantitySubject.next(this.cart.length);
-  }
-
-  public getCartQuantity() {
-    return this.cart.length || this.cartQuantitySubject.value;
-  }
-
 
   public addToCart(data: Product) {
     return this.master.addToCart(`${this.getCartURL}`, {...data});
+  }
+
+  public storeData<T>(keyName: string, data: T) {
+    localStorage.setItem(keyName, JSON.stringify(data));
+  }
+
+  public getStoredData(keyName: string) {
+    return JSON.parse(localStorage.getItem(keyName) ?? '[]');
   }
 }

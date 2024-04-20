@@ -3,7 +3,7 @@
   <div class="product-details">
     <div class="product-title">{{ product.title }}</div>
     <div class="product-info">
-      <div class="product-price">$ {{ product.price }}</div>
+      <div class="product-price">{{ product.price | currency }}</div>
       <div class="product-rating">
         <app-rating [rating]="product.rating.rate"></app-rating>
       </div>
