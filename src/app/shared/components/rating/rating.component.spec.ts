@@ -15,7 +15,8 @@ describe('RatingComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should get rating number', () => {
+    component.rating = 1;
+    expect(component.rating).toBe(1);
   });
 });

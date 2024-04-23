@@ -41,6 +41,7 @@ describe('AuthenticationService', () => {
   });
 
   it('should get the token', () => {
+    service.saveUser({ token: '12345' });
     expect(service.token).toBeTruthy();
   });
 
