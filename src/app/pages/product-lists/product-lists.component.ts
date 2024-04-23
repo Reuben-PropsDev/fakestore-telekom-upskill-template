@@ -39,7 +39,7 @@ export class ProductListsComponent implements OnInit {
     this.router.navigate(['product/', id]);
   }
 
-  private getAllProducts(){
+  public getAllProducts(){
     this.allProducts.getProducts().subscribe({
       next: (data) =>{
         this.products = data;

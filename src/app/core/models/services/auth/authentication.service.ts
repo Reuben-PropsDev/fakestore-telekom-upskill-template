@@ -52,7 +52,7 @@ export class AuthenticationService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  private saveUser(user: Login): void {
+  public saveUser(user: Login): void {
     this.userSubject.next(user);
     this.productService.storeData<Login>('user', user);
   }

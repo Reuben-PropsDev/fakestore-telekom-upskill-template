@@ -9,7 +9,7 @@ import { ProductListsService } from 'src/app/core/models/services/products/produ
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  private productId!: number;
+  public productId!: number;
   public product!: Product;
   public quantity!: number;
 

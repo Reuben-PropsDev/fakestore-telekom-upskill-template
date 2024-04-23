@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICart, Login, LoginUser, Product } from '../../interface/types';
-import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
