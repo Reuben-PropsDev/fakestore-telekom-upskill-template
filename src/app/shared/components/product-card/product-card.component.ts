@@ -13,7 +13,8 @@ export class ProductCardComponent {
   @Output() public addProductToCart = new EventEmitter();
   public quantity = 1;
 
-  public constructor(private productService: ProductListsService) {}
+  public constructor(private productService: ProductListsService) { }
+
   public addToCart(event: Event) {
     event.stopPropagation();
     const product = { ...this.product, quantity: this.quantity };
